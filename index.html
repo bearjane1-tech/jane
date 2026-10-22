@@ -1,0 +1,93 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>旅程規劃</title><style id="css">
+:root{--bg:#f3f5f7;--card:#fff;--tx:#14202b;--mu:#6b7a88;--ac:#0e7c86;--on:#fff;--ac2:#e0f2f3;--bd:#e3e8ec;--dg:#d33f49;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1417;--card:#192127;--tx:#e8eef2;--mu:#8fa0ad;--ac:#3fb8c2;--on:#062428;--ac2:#16353a;--bd:#27323a;--dg:#ff7a82;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1417;--card:#192127;--tx:#e8eef2;--mu:#8fa0ad;--ac:#3fb8c2;--on:#062428;--ac2:#16353a;--bd:#27323a;--dg:#ff7a82;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+#app{max-width:480px;margin:0 auto;padding-bottom:96px}
+button{font:inherit;color:inherit;cursor:pointer}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;justify-content:space-between;align-items:center;padding:14px 16px 6px}
+h1{margin:0;font-size:22px;cursor:pointer}h2{margin:0 0 4px;font-size:18px}
+small{color:var(--mu)}
+.ic{width:40px;height:40px;border-radius:50%;border:1px solid var(--bd);background:var(--card);font-size:16px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:8px 16px}
+.tab{flex:0 0 auto;min-width:56px;border:1px solid var(--bd);background:var(--card);border-radius:14px;padding:6px 10px;display:flex;flex-direction:column;align-items:center;font-size:12px}
+.tab b{font-size:14px}.tab.on{background:var(--ac);color:var(--on);border-color:var(--ac)}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:6px 16px;color:var(--mu);font-size:13px}
+.dh button{border:0;background:none;color:var(--mu);font-size:18px}
+.it{display:flex;gap:10px;padding:0 16px;margin:10px 0}
+.tm{width:44px;text-align:right;font-size:13px;padding-top:12px;flex:none}.tm b{display:block}.tm i{color:var(--mu);font-style:normal;font-size:12px}
+.cd{flex:1;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px;min-width:0;cursor:pointer}
+.top{display:flex;gap:10px;align-items:flex-start}
+.ico{width:34px;height:34px;border-radius:10px;background:var(--ac2);display:grid;place-items:center;flex:none}
+.tt{flex:1;min-width:0}.tt b{display:block;overflow-wrap:anywhere}.tt span{color:var(--mu);font-size:13px}
+em{font-style:normal;font-weight:600;font-size:13px;white-space:nowrap}
+.meta{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}.meta a,.meta span{font-size:12px;background:var(--ac2);color:var(--tx);padding:3px 9px;border-radius:99px;text-decoration:none}
+.note{margin-top:6px;color:var(--mu);font-size:13px;white-space:pre-wrap}
+.empty{text-align:center;color:var(--mu);padding:48px 24px}
+.box{margin:10px 16px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px}
+.big{font-size:32px;font-weight:700;color:var(--ac)}
+.ln{display:flex;justify-content:space-between;margin-top:10px;font-size:14px}
+.bar{height:6px;border-radius:9px;background:var(--ac2);margin-top:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding-bottom:env(safe-area-inset-bottom,0px);background:var(--card);border-top:1px solid var(--bd);display:flex;justify-content:space-around;align-items:center;z-index:6}
+nav button{border:0;background:none;padding:10px 24px;font-size:12px;color:var(--mu);display:flex;flex-direction:column;align-items:center}nav button span{font-size:20px}nav button.on{color:var(--ac);font-weight:600}
+nav .plus{width:52px;height:52px;border-radius:50%;background:var(--ac);color:var(--on);font-size:28px;line-height:1;padding:0;margin-top:-22px;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.sh{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:20}.sh.on{display:flex}
+.pn{background:var(--card);width:100%;max-width:480px;max-height:88%;overflow:auto;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));box-sizing:border-box}
+label{display:block;font-size:12px;color:var(--mu);margin-top:10px}
+input,textarea{width:100%;box-sizing:border-box;margin-top:4px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit;font-size:16px}
+.row{display:flex;gap:10px}.row label{flex:1;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.chip{border:1px solid var(--bd);background:var(--bg);border-radius:99px;padding:5px 11px;font-size:13px}.chip.on{background:var(--ac);color:var(--on);border-color:var(--ac)}
+.btns{display:flex;gap:10px;margin-top:16px}.btns button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--bd);background:var(--bg)}
+.btns .pri{background:var(--ac);color:var(--on);border-color:var(--ac);font-weight:600}.btns .del{color:var(--dg)}
+</style></head><body><div id="app"></div><div class="sh" id="sh" data-a="bg"><div class="pn" id="pn"></div></div>
+<script id="data" type="application/json">{"title":"東京 3 日遊（範例）","cur":"NT$","days":[{"date":"2026-12-05","items":[{"id":"a1","type":"flight","title":"台北 → 東京成田","from":"TPE","to":"NRT","time":"08:05","end":"12:25","place":"桃園國際機場","ref":"座位 32A · 訂位代號 ABC123","note":"行李 23kg","cost":"9800"},{"id":"a2","type":"train","title":"成田特快 N'EX","from":"成田機場","to":"新宿","time":"13:30","end":"14:35","place":"","ref":"7 號車 12A","note":"","cost":"3070"},{"id":"a3","type":"hotel","title":"新宿格拉斯麗飯店","from":"","to":"","time":"15:30","end":"","place":"東京都新宿區歌舞伎町1-19-1","ref":"預訂編號 H-88213","note":"Check-in 15:00 後，含早餐","cost":"7200"},{"id":"a4","type":"food","title":"一蘭拉麵 新宿店","from":"","to":"","time":"18:30","end":"","place":"一蘭 新宿中央東口店","ref":"","note":"","cost":"1100"}]},{"date":"2026-12-06","items":[{"id":"b1","type":"ticket","title":"teamLab Planets","from":"","to":"","time":"10:00","end":"12:30","place":"teamLab Planets TOKYO","ref":"QR 已存相簿","note":"需赤腳，穿短褲","cost":"3800"},{"id":"b2","type":"food","title":"築地壽司大","from":"","to":"","time":"13:00","end":"","place":"築地場外市場","ref":"候位","note":"","cost":"3500"}]},{"date":"2026-12-07","items":[{"id":"c1","type":"ticket","title":"晴空塔展望台","from":"","to":"","time":"10:30","end":"","place":"東京晴空塔","ref":"","note":"","cost":"1500"},{"id":"c2","type":"flight","title":"東京羽田 → 台北","from":"HND","to":"TPE","time":"19:20","end":"22:00","place":"羽田機場","ref":"座位 41C","note":"","cost":"0"}]}]}</script>
+<script id="code">
+const $=s=>document.querySelector(s),T={train:['🚆','交通／車次'],flight:['✈️','航班'],hotel:['🏨','飯店'],food:['🍜','餐廳'],ticket:['🎫','門票／景點'],other:['📍','其他']},W='日一二三四五六';
+const BASE=$('#data').textContent;let S=JSON.parse(BASE),day=0,view='plan',A=null,ft='train',eid=null,t;
+function loadLocal(){try{const l=JSON.parse(localStorage.getItem('trip'));if(l&&l.b===BASE){S=l.s;return true}}catch(e){}return false}
+try{day=+sessionStorage.getItem('day')||0}catch(e){}
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=x=>+x.cost||0,money=n=>S.cur+Math.round(n).toLocaleString(),md=d=>(+d.slice(5,7))+'/'+(+d.slice(8)),wd=d=>'週'+W[new Date(d+'T00:00:00').getDay()];
+const srt=d=>d.items.slice().sort((a,b)=>(a.time||'99').localeCompare(b.time||'99')),dsum=d=>d.items.reduce((s,x)=>s+num(x),0),total=()=>S.days.reduce((s,d)=>s+dsum(d),0);
+const uid=()=>Math.random().toString(36).slice(2,9);
+function doc(){return '<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>旅程規劃</title><style id="css">'+$('#css').textContent+'</style></head><body><div id="app"></div><div class="sh" id="sh" data-a="bg"><div class="pn" id="pn"></div></div><script id="data" type="application/json">'+JSON.stringify(S).replace(/</g,'\\u003c')+'<\/script><script id="code">'+$('#code').textContent+'<\/script></body></html>'}
+function save(){clearTimeout(t);t=setTimeout(async()=>{if(A){try{await A.publish(doc());return}catch(e){}}try{localStorage.setItem('trip',JSON.stringify({b:BASE,s:S}))}catch(e){}},600)}
+function card(x){const m='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.place||''),r=(x.from||x.to)?'<span>'+esc(x.from)+' → '+esc(x.to)+'</span>':'';
+return '<div class="it"><div class="tm"><b>'+esc(x.time)+'</b><i>'+esc(x.end)+'</i></div><div class="cd" data-a="edit" data-id="'+x.id+'"><div class="top"><div class="ico">'+T[x.type][0]+'</div><div class="tt"><b>'+esc(x.title)+'</b>'+r+'</div>'+(num(x)?'<em>'+money(num(x))+'</em>':'')+'</div>'+((x.place||x.ref)?'<div class="meta">'+(x.place?'<a href="'+m+'" target="_blank" rel="noopener">🗺️ '+esc(x.place)+'</a>':'')+(x.ref?'<span>💺 '+esc(x.ref)+'</span>':'')+'</div>':'')+(x.note?'<div class="note">'+esc(x.note)+'</div>':'')+'</div></div>'}
+function plan(){const d=S.days[day];return '<div class="tabs">'+S.days.map((x,i)=>'<button class="tab'+(i==day?' on':'')+'" data-a="day" data-i="'+i+'"><b>D'+(i+1)+'</b><span>'+md(x.date)+'</span></button>').join('')+'<button class="tab" data-a="addday"><b>＋</b><span>加一天</span></button></div><div class="dh"><span>'+md(d.date)+' '+wd(d.date)+' · 當日 '+money(dsum(d))+'</span><button data-a="dayopt">⋯</button></div>'+(d.items.length?srt(d).map(card).join(''):'<div class="empty">這天還沒有行程<br>按下方 ＋ 新增</div>')}
+function cost(){const by={};S.days.forEach(d=>d.items.forEach(x=>by[x.type]=(by[x.type]||0)+num(x)));const tt=total()||1;
+return '<div class="box"><small>總花費</small><div class="big">'+money(total())+'</div></div><div class="box"><b>依類別</b>'+Object.keys(T).filter(k=>by[k]).map(k=>'<div class="ln"><span>'+T[k][0]+' '+T[k][1]+'</span><span>'+money(by[k])+'</span></div><div class="bar"><i style="width:'+by[k]/tt*100+'%"></i></div>').join('')+'</div><div class="box"><b>依日期</b>'+S.days.map((d,i)=>'<div class="ln"><span>D'+(i+1)+' · '+md(d.date)+'</span><span>'+money(dsum(d))+'</span></div>').join('')+'</div>'}
+function render(){if(day>=S.days.length)day=0;try{sessionStorage.setItem('day',day)}catch(e){}
+$('#app').innerHTML='<header><div><small>'+md(S.days[0].date)+' – '+md(S.days[S.days.length-1].date)+' · '+S.days.length+' 天</small><h1 data-a="trip">'+esc(S.title)+'</h1></div><button class="ic" data-a="share">↗</button></header>'+(view=='plan'?plan():cost())+'<nav><button class="'+(view=='plan'?'on':'')+'" data-a="view" data-v="plan"><span>📅</span>行程</button><button class="plus" data-a="add">+</button><button class="'+(view=='cost'?'on':'')+'" data-a="view" data-v="cost"><span>💰</span>費用</button></nav>'}
+function sheet(h){$('#pn').innerHTML=h;$('#sh').classList.add('on')}
+const close=()=>$('#sh').classList.remove('on'),v=id=>$('#'+id).value.trim();
+function form(x,isNew){x=x||{};ft=x.type||'train';
+sheet('<h2>'+(isNew?'新增行程':'編輯行程')+'</h2><div class="chips">'+Object.keys(T).map(k=>'<button class="chip'+(ft==k?' on':'')+'" data-a="type" data-k="'+k+'">'+T[k][0]+' '+T[k][1]+'</button>').join('')+'</div><label>名稱<input id="f_title" value="'+esc(x.title)+'" placeholder="例：新幹線 のぞみ 15 號"></label><div class="row" id="route"><label>出發地<input id="f_from" value="'+esc(x.from)+'"></label><label>抵達地<input id="f_to" value="'+esc(x.to)+'"></label></div><div class="row"><label>時間／出發／入住<input type="time" id="f_time" value="'+esc(x.time)+'"></label><label>結束／抵達<input type="time" id="f_end" value="'+esc(x.end)+'"></label></div><label>地點／地址（點擊可開地圖）<input id="f_place" value="'+esc(x.place)+'"></label><label>座位、訂位編號<input id="f_ref" value="'+esc(x.ref)+'"></label><label>備註<textarea id="f_note" rows="2">'+esc(x.note)+'</textarea></label><label>費用<input type="number" inputmode="decimal" id="f_cost" value="'+esc(x.cost)+'"></label><div class="btns">'+(isNew?'':'<button class="del" data-a="delitem">刪除</button>')+'<button class="pri" data-a="saveitem">儲存</button></div>');rt()}
+const rt=()=>$('#route').style.display=(ft=='train'||ft=='flight')?'':'none';
+function txt(){return S.title+'\n'+S.days.map((d,i)=>'\n【D'+(i+1)+' '+md(d.date)+' '+wd(d.date)+'】\n'+srt(d).map(x=>[x.time&&(x.time+(x.end?'–'+x.end:'')),T[x.type][0]+x.title,(x.from||x.to)&&(x.from+'→'+x.to),x.place,x.ref&&'('+x.ref+')',num(x)&&money(num(x))].filter(Boolean).join(' ')).join('\n')).join('\n')+'\n\n總花費 '+money(total())}
+document.addEventListener('click',async e=>{const el=e.target.closest('[data-a]');if(!el||e.target.closest('a'))return;const a=el.dataset.a,D=S.days[day];
+if(a=='bg'){if(e.target.id=='sh')close();return}
+if(a=='day'){day=+el.dataset.i}
+else if(a=='addday'){const l=S.days[S.days.length-1].date,n=new Date(l+'T00:00:00Z');n.setUTCDate(n.getUTCDate()+1);S.days.push({date:n.toISOString().slice(0,10),items:[]});day=S.days.length-1;save()}
+else if(a=='dayopt'){sheet('<h2>編輯這一天</h2><label>日期<input type="date" id="f_date" value="'+D.date+'"></label><div class="btns">'+(S.days.length>1?'<button class="del" data-a="delday">刪除此天</button>':'')+'<button class="pri" data-a="savedate">儲存</button></div>');return}
+else if(a=='savedate'){if($('#f_date').value)D.date=$('#f_date').value;close();save()}
+else if(a=='delday'){if(el.dataset.s){S.days.splice(day,1);day=0;close();save()}else{el.dataset.s=1;el.textContent='再按一次確認刪除';return}}
+else if(a=='view'){view=el.dataset.v}
+else if(a=='add'){eid=null;form(null,true);return}
+else if(a=='edit'){eid=el.dataset.id;form(D.items.find(x=>x.id==eid));return}
+else if(a=='type'){ft=el.dataset.k;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.dataset.k==ft));rt();return}
+else if(a=='saveitem'){if(!v('f_title')){$('#f_title').focus();return}const o={type:ft,title:v('f_title'),from:v('f_from'),to:v('f_to'),time:v('f_time'),end:v('f_end'),place:v('f_place'),ref:v('f_ref'),note:v('f_note'),cost:v('f_cost')};if(ft!='train'&&ft!='flight'){o.from='';o.to=''}
+if(eid){Object.assign(D.items.find(x=>x.id==eid),o)}else D.items.push(Object.assign({id:uid()},o));close();save()}
+else if(a=='delitem'){if(el.dataset.s){D.items=D.items.filter(x=>x.id!=eid);close();save()}else{el.dataset.s=1;el.textContent='再按一次確認刪除';return}}
+else if(a=='trip'){sheet('<h2>旅程設定</h2><label>旅程名稱<input id="f_tt" value="'+esc(S.title)+'"></label><label>幣別符號<input id="f_cur" value="'+esc(S.cur)+'"></label><div class="btns"><button class="pri" data-a="savetrip">儲存</button></div>');return}
+else if(a=='savetrip'){S.title=v('f_tt')||S.title;S.cur=v('f_cur')||S.cur;close();save()}
+else if(a=='share'){sheet('<h2>分享行程</h2><small>把這個網站的網址傳給朋友就能瀏覽。你的修改只存在這支手機；要讓大家看到最新版，請按「下載網頁檔」，再重新上傳到你的網站空間。也可複製下方文字貼到 LINE。</small><textarea id="f_txt" rows="9" readonly>'+esc(txt())+'</textarea><div class="btns"><button data-a="dl">下載網頁檔</button><button class="pri" data-a="copy">複製行程文字</button></div>');return}
+else if(a=='dl'){const b=new Blob([doc()],{type:'text/html'}),u=URL.createObjectURL(b),k=document.createElement('a');k.href=u;k.download='index.html';k.click();setTimeout(()=>URL.revokeObjectURL(u),2000);return}
+else if(a=='copy'){const x=$('#f_txt');try{await navigator.clipboard.writeText(x.value)}catch(_){x.select();document.execCommand('copy')}el.textContent='已複製 ✓';return}
+render()});
+if(!(window.claude&&claude.use))loadLocal();
+render();
+if(window.claude&&claude.use)claude.use('artifact').then(a=>{A=a;if(!a&&loadLocal())render()}).catch(()=>{});
+</script></body></html>
